@@ -52,3 +52,12 @@ services:
       - ./pgdata:/var/lib/postgresql/data
     ports:
       - "6000:5432"
+  flask:
+    container_name: flask
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    ports:
+      - 5000:5000
+    depends_on:
+      - postgres
