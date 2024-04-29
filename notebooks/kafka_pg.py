@@ -14,19 +14,6 @@ conn = psycopg2.connect(
 
 cur = conn.cursor()
 
-# -- Drop the 'messages' table if it exists
-cur.execute("DROP TABLE IF EXISTS messages;")
-
-# -- Create the 'messages' table
-cur.execute(
-    """CREATE TABLE messages (
-    id SERIAL PRIMARY KEY,
-    time TIMESTAMP,
-    message_id VARCHAR(255),
-    client_id INTEGER,
-    amount INTEGER);"""
-)
-
 consumer = KafkaConsumer(
     "streaming",
     bootstrap_servers=["broker:9092"],
