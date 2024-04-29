@@ -22,13 +22,10 @@ RUN wget https://dlcdn.apache.org/kafka/3.7.0/kafka_2.13-3.7.0.tgz && \
 RUN rm -f /home/jovyan/kafka_2.13-3.7.0.tgz
 
 COPY trigger_stream.sh /home/jovyan/trigger_stream.sh
-RUN chmod +x /home/jovyan/trigger_stream.sh
+RUN sed -i 's/\r$//' /home/jovyan/trigger_stream.sh
 
 USER ${NB_USER}
 
 WORKDIR /home/jovyan/notebooks
 
 CMD ["/bin/bash", "-c", "/home/jovyan/trigger_stream.sh && start-notebook.sh --NotebookApp.token='root' --NotebookApp.allow_origin='*'"]
-
-
-
