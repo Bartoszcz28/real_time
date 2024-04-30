@@ -12,6 +12,7 @@ cur = conn.cursor()
 
 # -- Drop the 'messages' table if it exists
 cur.execute("DROP TABLE IF EXISTS messages;")
+conn.commit()
 
 # -- Create the 'messages' table
 cur.execute(
@@ -22,9 +23,10 @@ cur.execute(
     client_id INTEGER,
     amount INTEGER);"""
 )
+conn.commit()
 
 cur.execute(
-"""
+    """
 create table customer_dim (
 	customer_id INT,
 	first_name VARCHAR(50),
@@ -135,8 +137,7 @@ insert into customer_dim (customer_id, first_name, last_name, email, gender, cou
 insert into customer_dim (customer_id, first_name, last_name, email, gender, country_id) values (100, 'Sonni', 'Wightman', 'swightman2r@jigsy.com', 'Female', 3);
 """
 )
-
-
+conn.commit()
 
 
 cur.execute(
@@ -156,8 +157,7 @@ Insert Into country (country_id, country) Values (8, 'Portugal');
 Insert Into country (country_id, country) Values (9, 'Belgium');  
 Insert Into country (country_id, country) Values (10, 'Denmark');"""
 )
-
-
+conn.commit()
 
 cur.execute(
     """CREATE TABLE atm (
@@ -177,9 +177,7 @@ Insert Into atm (atm_id, atm_number, country_id) Values (8, '61-950502-476133-1'
 Insert Into atm (atm_id, atm_number, country_id) Values (9, '32-679020-562334-4', 9);  
 Insert Into atm (atm_id, atm_number, country_id) Values (10, '37-456918-870753-5', 1);     """
 )
-
 conn.commit()
 
 cur.close()
 conn.close()
-
