@@ -61,3 +61,12 @@ services:
       - 5000:5000
     depends_on:
       - postgres
+  dashboard:
+    container_name: dashboard
+    build:
+      context: .
+      dockerfile: dashboard/Dockerfile
+    ports:
+      - 5001:5001
+    depends_on:
+      - postgres
