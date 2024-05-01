@@ -1,11 +1,17 @@
 FROM python:3.8-alpine
 
-COPY dashboard/requirements.txt /dashboard/requirements.txt
+RUN apk update && \
+    apk add --no-cache build-base openblas-dev freetype-dev pkgconfig
 
-COPY dashboard/dashboard.py /dashboard/dashboard.py
+ENV BLAS=/usr/lib/libopenblas.so LAPACK=/usr/lib/libopenblas.so
+
+RUN pip install numpy dash pandas psycopg2-binary
+
+# COPY dashboard/requirements.txt /dashboard/requirements.txt
+
+
+COPY dashboard/table.py /dashboard/table.py
 
 WORKDIR /dashboard
 
-RUN pip install -r requirements.txt
-
-CMD ["python", "dashboard.py"]
+CMD ["python", "table.py"]
