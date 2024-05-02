@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import psycopg2
+from psycopg2 import extras
 import os
 import time
 
@@ -12,21 +13,23 @@ conn = psycopg2.connect(
     password="postgres",
     port="5432",
 )
-
-cur = conn.cursor()
+cur = conn.cursor(cursor_factory=extras.RealDictCursor)
 
 app = Flask(__name__)
 
 
 @app.route("/get-user/<user_id>")
 def home(user_id):
+    cur.execute(
+        f"""
+    SELECT first_name, last_name, email, gender, time, amount, country 
+        FROM customer_dim c
+        JOIN messages m ON c.customer_id = m.client_id
+        JOIN country co ON c.country_id = co.country_id
+        WHERE client_id ={user_id};"""
+    )
 
-    cur.execute(f"""Select SUM(amount) FROM messages WHERE client_id ={user_id};""")
-
-    user_data = {
-        "user_id": user_id,
-        "amount": cur.fetchall()[0][0],
-    }
+    user_data = cur.fetchall()
 
     conn.commit()
 
@@ -35,13 +38,6 @@ def home(user_id):
         user_data["extra"] = extra
 
     return jsonify(user_data), 200
-
-
-# @app.route("/create-user", methods=["POST"])
-# def create_user():
-#     data = request.get_json()
-
-#     return jsonify(data), 200
 
 
 if __name__ == "__main__":
