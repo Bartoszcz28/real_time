@@ -37,11 +37,11 @@ def home(user_id):
     return jsonify(user_data), 200
 
 
-@app.route("/create-user", methods=["POST"])
-def create_user():
-    data = request.get_json()
+# @app.route("/create-user", methods=["POST"])
+# def create_user():
+#     data = request.get_json()
 
-    return jsonify(data), 200
+#     return jsonify(data), 200
 
 
 if __name__ == "__main__":
