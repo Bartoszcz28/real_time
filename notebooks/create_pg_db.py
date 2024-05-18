@@ -15,14 +15,39 @@ cur.execute("DROP TABLE IF EXISTS messages;")
 conn.commit()
 
 # -- Create the 'messages' table
+# cur.execute(
+#     """CREATE TABLE messages (
+#     id SERIAL PRIMARY KEY,
+#     time TIMESTAMP,
+#     message_id VARCHAR(255),
+#     client_id INTEGER,
+#     amount INTEGER);"""
+# )
+
+
 cur.execute(
-    """CREATE TABLE messages (
-    id SERIAL PRIMARY KEY,
-    time TIMESTAMP,
-    message_id VARCHAR(255),
-    client_id INTEGER,
-    amount INTEGER);"""
+    """
+    CREATE TABLE messages (
+        id SERIAL PRIMARY KEY,
+        time TIMESTAMP,
+        message_id VARCHAR(255),
+        client_id INTEGER,
+        amount INTEGER,
+        first_name VARCHAR(255),
+        last_name VARCHAR(255),
+        email VARCHAR(255),
+        gender VARCHAR(50),
+        country_id INTEGER,
+        country VARCHAR(255),
+        capital VARCHAR(255),
+        atm_id INTEGER,
+        atm_number VARCHAR(255),
+        aml INTEGER);"""
 )
+
+conn.commit()
+
+cur.execute("DROP TABLE IF EXISTS customer_dim;")
 conn.commit()
 
 cur.execute(
@@ -139,6 +164,8 @@ insert into customer_dim (customer_id, first_name, last_name, email, gender, cou
 )
 conn.commit()
 
+cur.execute("DROP TABLE IF EXISTS country;")
+conn.commit()
 
 cur.execute(
     """CREATE TABLE country (
@@ -159,6 +186,10 @@ Insert Into country (country_id, country) Values (10, 'Denmark');"""
 )
 conn.commit()
 
+
+cur.execute("DROP TABLE IF EXISTS atm;")
+conn.commit()
+
 cur.execute(
     """CREATE TABLE atm (
     atm_id INT,
@@ -176,6 +207,33 @@ Insert Into atm (atm_id, atm_number, country_id) Values (7, '76-115021-764852-8'
 Insert Into atm (atm_id, atm_number, country_id) Values (8, '61-950502-476133-1', 10);  
 Insert Into atm (atm_id, atm_number, country_id) Values (9, '32-679020-562334-4', 9);  
 Insert Into atm (atm_id, atm_number, country_id) Values (10, '37-456918-870753-5', 1);     """
+)
+conn.commit()
+
+
+cur.execute("DROP TABLE IF EXISTS location_national_capital;")
+conn.commit()
+
+cur.execute(
+    """CREATE TABLE location_national_capital (
+    country_id INT PRIMARY KEY,
+    latitude DECIMAL(10, 7) NOT NULL,
+    longitude DECIMAL(10, 7) NOT NULL);
+
+
+    INSERT INTO location_national_capital (country_id, latitude, longitude)
+    VALUES
+    (1, 52.2297, 21.0122), -- Poland
+    (2, 52.5200, 13.4050), -- Germany
+    (3, 48.8566, 2.3522),  -- France
+    (4, 41.3275, 19.8189), -- Albania
+    (5, 48.1482, 17.1067), -- Slovakia
+    (6, 40.4168, -3.7038), -- Spain
+    (7, 41.9028, 12.4964), -- Italy
+    (8, 38.7167, -9.1393), -- Portugal
+    (9, 50.8503, 4.3517),  -- Belgium
+    (10, 55.6761, 12.5683); -- Denmark
+    """
 )
 conn.commit()
 
