@@ -7,6 +7,9 @@ from kafka import KafkaConsumer
 from json import loads
 import threading
 import datetime
+import time
+
+time.sleep(70)
 
 # Global variable to store data
 data = []
