@@ -30,20 +30,20 @@ if __name__ == "__main__":
     try:
         while True:
             message_id += 1
-            t = datetime.now() + timedelta(seconds=random.randint(-15, 0))
+            t = datetime.now()  # + timedelta(seconds=random.randint(-15, 0))
 
             # Random customer selection from DataFrame person
             client_id = random.choice(person["customer_id"].unique())
-            
+
             # Selecting rows from the DataFrame result corresponding to the selected client
             customer_info = result.sample(n=1).iloc[0]
-            
+
             # Selecting a row from the DataFrame person corresponding to the selected client
             person_info = person[person["customer_id"] == client_id].iloc[0]
-            
+
             message = {
                 "time": str(t),
-                "message_id": int(message_id), # Conversion to int
+                "message_id": int(message_id),  # Conversion to int
                 "client_id": int(client_id),  # Conversion to int
                 "amount": int(random.randint(-1000, 1000)),  # Conversion to int
                 "first_name": str(person_info["first_name"]),
