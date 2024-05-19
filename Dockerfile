@@ -11,6 +11,7 @@ RUN pip install --no-cache-dir tensorflow==2.15.0 torch==2.2.0 && \
     pip install --no-cache-dir pylatexenc==2.10 ipywidgets==8.1.0 flask==3.0.1 pydot==2.0.0 && \
     pip install --no-cache-dir pandas==1.5.3 numpy==1.24.4 scipy==1.11.2 matplotlib==3.7.2 sympy==1.12 seaborn==0.12.2 && \
     pip install --no-cache-dir kafka-python==2.0.2 confluent_kafka==2.3.0 && \
+    pip install --no-cache-dir dash==2.16.1 plotly==5.21.0 nest-asyncio==1.6.0 && \
     fix-permissions "/home/${NB_USER}" 
 
 RUN pip install psycopg2-binary==2.9.9
