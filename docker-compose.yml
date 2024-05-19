@@ -70,3 +70,10 @@ services:
   #     - 5001:5001
   #   depends_on:
   #     - postgres
+  # aml:
+  #   container_name: aml
+  #   build:
+  #     context: .
+  #     dockerfile: aml/Dockerfile
+  #   depends_on:
+  #     - postgres
