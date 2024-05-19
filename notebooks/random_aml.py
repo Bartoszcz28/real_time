@@ -1,6 +1,10 @@
 from kafka import KafkaConsumer, KafkaProducer
 from json import loads, dumps
 import random
+import time
+
+time.sleep(30)
+
 
 # Consumer configuration
 consumer = KafkaConsumer(
@@ -19,7 +23,7 @@ producer = KafkaProducer(
 )
 # try:
 for message in consumer:
-     # Receive the message
+    # Receive the message
     message_value = message.value
     # print(f"Original message: {message_value}")
 
