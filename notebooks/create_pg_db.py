@@ -14,17 +14,6 @@ cur = conn.cursor()
 cur.execute("DROP TABLE IF EXISTS messages;")
 conn.commit()
 
-# -- Create the 'messages' table
-# cur.execute(
-#     """CREATE TABLE messages (
-#     id SERIAL PRIMARY KEY,
-#     time TIMESTAMP,
-#     message_id VARCHAR(255),
-#     client_id INTEGER,
-#     amount INTEGER);"""
-# )
-
-
 cur.execute(
     """
     CREATE TABLE messages (
