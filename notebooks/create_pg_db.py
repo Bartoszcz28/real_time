@@ -36,6 +36,61 @@ cur.execute(
 
 conn.commit()
 
+
+# -- Drop the 'messages' table if it exists
+cur.execute("DROP TABLE IF EXISTS aml_true;")
+conn.commit()
+
+cur.execute(
+    """
+    CREATE TABLE aml_true (
+        id SERIAL PRIMARY KEY,
+        time TIMESTAMP,
+        message_id VARCHAR(255),
+        client_id INTEGER,
+        amount INTEGER,
+        first_name VARCHAR(255),
+        last_name VARCHAR(255),
+        email VARCHAR(255),
+        gender VARCHAR(50),
+        country_id INTEGER,
+        country VARCHAR(255),
+        capital VARCHAR(255),
+        atm_id INTEGER,
+        atm_number VARCHAR(255),
+        aml INTEGER);"""
+)
+
+conn.commit()
+
+
+
+# -- Drop the 'messages' table if it exists
+cur.execute("DROP TABLE IF EXISTS aml_false;")
+conn.commit()
+
+cur.execute(
+    """
+    CREATE TABLE aml_false (
+        id SERIAL PRIMARY KEY,
+        time TIMESTAMP,
+        message_id VARCHAR(255),
+        client_id INTEGER,
+        amount INTEGER,
+        first_name VARCHAR(255),
+        last_name VARCHAR(255),
+        email VARCHAR(255),
+        gender VARCHAR(50),
+        country_id INTEGER,
+        country VARCHAR(255),
+        capital VARCHAR(255),
+        atm_id INTEGER,
+        atm_number VARCHAR(255),
+        aml INTEGER);"""
+)
+
+conn.commit()
+
 cur.execute("DROP TABLE IF EXISTS customer_dim;")
 conn.commit()
 
