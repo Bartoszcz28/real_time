@@ -16,7 +16,7 @@ consumer = KafkaConsumer(
     bootstrap_servers=["broker:9092"],
     auto_offset_reset="latest",
     enable_auto_commit=True,
-    group_id="bootstrap-server",
+    group_id="bootstrap-server3",
     value_deserializer=lambda x: loads(x.decode("ISO-8859-1")),
 )
 

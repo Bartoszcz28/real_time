@@ -11,4 +11,4 @@ python notebooks/create_pg_db.py &
 
 sleep 10
 
-python notebooks/kafka_pg.py & python notebooks/random_generator.py & python3 notebooks/random_aml.py & python notebooks/dashboard_asyn.py &
+python notebooks/kafka_pg.py & python notebooks/random_generator.py & python3 notebooks/aml.py & python notebooks/dashboard_asyn.py &
