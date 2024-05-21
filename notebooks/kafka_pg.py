@@ -17,18 +17,22 @@ cur = conn.cursor()
 
 # Ustawienia konsumenta Kafka
 consumer = KafkaConsumer(
-    "streaming",
+    "aml",
     bootstrap_servers=["broker:9092"],
     auto_offset_reset="latest",
     enable_auto_commit=True,
-    group_id="bootstrap-server",
+    group_id="bootstrap-server2",
     value_deserializer=lambda x: loads(x.decode("utf-8")),
 )
 
 try:
     for message in consumer:
+        if message.value["aml"] == 1:
+            table = 'aml_true'
+        else:
+            table = 'aml_false'
         cur.execute(
-            """INSERT INTO messages (
+            f"""INSERT INTO {table} (
                 time, message_id, client_id, amount, first_name, last_name, email, 
                 gender, country_id, country, capital, atm_id, atm_number, aml
             ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
